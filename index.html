@@ -1,0 +1,308 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--color-background-primary);
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  margin-bottom: 0;
+}
+.topbar-logo { height: 44px; }
+.topbar-info { font-size: 11px; color: var(--color-text-secondary); text-align: right; line-height: 1.5; }
+.topbar-info a { color: #1D9E75; text-decoration: none; }
+.hero {
+  background: #085041; padding: 2rem 1.5rem;
+  text-align: center; margin-bottom: 1.5rem;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #9FE1CB; font-size: 11px; font-weight: 500;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  padding: 4px 14px; border-radius: 999px; margin-bottom: 1rem;
+}
+.hero h1 { font-size: 3rem; font-weight: 700; color: #fff; letter-spacing: 4px; margin-bottom: 0.5rem; }
+.hero-tagline { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 400px; margin: 0 auto 1.25rem; line-height: 1.7; }
+.hero-cta {
+  background: #1D9E75; color: #fff; border: none;
+  padding: 11px 26px; border-radius: 999px;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+}
+.hero-cta:hover { background: #0F6E56; }
+.onmb-banner {
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.onmb-banner img { height: 50px; }
+.onmb-banner-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); }
+.onmb-banner-sub { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-top: 2px; }
+.onmb-stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.stat-pill { background: #E1F5EE; color: #085041; font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 999px; }
+.section-label { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.pillar { background: var(--color-background-primary); border-left: 3px solid #1D9E75; padding: 12px; }
+.pillar-num { font-size: 20px; font-weight: 700; color: #9FE1CB; margin-bottom: 6px; }
+.pillar-text { font-size: 12px; color: var(--color-text-primary); line-height: 1.5; font-weight: 500; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.member { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 12px 8px; text-align: center; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; margin: 0 auto 7px; }
+.av-pres { background: #085041; color: #9FE1CB; }
+.av-vp   { background: #0C447C; color: #B5D4F4; }
+.av-rap  { background: #633806; color: #FAC775; }
+.av-mem  { background: #444441; color: #D3D1C7; }
+.av-sup  { background: #72243E; color: #F4C0D1; }
+.member-name { font-size: 11px; font-weight: 500; color: var(--color-text-primary); line-height: 1.35; }
+.role-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 999px; margin-top: 4px; font-weight: 500; }
+.rt-pres { background: #E1F5EE; color: #085041; }
+.rt-vp   { background: #E6F1FB; color: #0C447C; }
+.rt-rap  { background: #FAEEDA; color: #633806; }
+.rt-mem  { background: #F1EFE8; color: #444441; }
+.rt-sup  { background: #FBEAF0; color: #72243E; }
+.generator { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1.5rem; }
+.gen-head { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.gen-desc { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1rem; }
+.gen-wrap { display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap; }
+canvas { border-radius: 10px; display: block; }
+.gen-fields { flex: 1; min-width: 190px; }
+.field-lbl { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; display: block; }
+.field-inp { width: 100%; padding: 8px 10px; margin-bottom: 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 13px; background: var(--color-background-secondary); color: var(--color-text-primary); }
+.file-lbl { display: block; text-align: center; padding: 8px; border: 0.5px dashed var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 12px; color: var(--color-text-secondary); cursor: pointer; margin-bottom: 10px; background: var(--color-background-secondary); }
+#fi { display: none; }
+.dl-btn { display: block; width: 100%; text-align: center; padding: 10px; background: #085041; color: #fff; border: none; border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; cursor: pointer; margin-top: 4px; }
+.dl-btn:hover { background: #0F6E56; }
+.dl-status { font-size: 11px; color: #1D9E75; text-align: center; margin-top: 6px; min-height: 16px; }
+.slogan { text-align: center; padding: 1.5rem; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 1rem; }
+.slogan p { font-size: 15px; font-weight: 500; color: var(--color-text-primary); line-height: 1.7; }
+.slogan span { color: #0F6E56; }
+.footer-strip { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 11px; color: var(--color-text-secondary); flex-wrap: wrap; }
+.footer-strip img { height: 26px; opacity: 0.7; }
+</style>
+
+<div class="topbar">
+  <img class="topbar-logo" src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
+  <div class="topbar-info">
+    Élections ordinales 2026<br>
+    <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank">Liste des électeurs</a> · <a href="https://ordremedecinsbenin.bj" target="_blank">ordremedecinsbenin.bj</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Élections ONMB 2026 · Conseil départemental de l'Atlantique</div>
+  <h1>IMPACT</h1>
+  <p class="hero-tagline">Un Ordre qui protège, qui accompagne, et qui inspire confiance aux médecins comme aux patients.</p>
+  <button class="hero-cta" onclick="document.getElementById('gen').scrollIntoView({behavior:'smooth'})">Créer mon badge de soutien</button>
+</div>
+
+<div class="onmb-banner">
+  <img src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
+  <div style="flex:1;min-width:200px;">
+    <div class="onmb-banner-title">Ordre National des Médecins du Bénin (ONMB)</div>
+    <div class="onmb-banner-sub">Institution de droit privé chargée d'une mission de service public — régulation déontologique de la profession médicale au Bénin · Vote en ligne sécurisé</div>
+    <div class="onmb-stats">
+      <span class="stat-pill">4 000+ membres</span>
+      <span class="stat-pill">+(229) 94 96 81 81</span>
+      <span class="stat-pill">Cotonou, Bénin</span>
+    </div>
+  </div>
+</div>
+
+<div style="margin-bottom:1.5rem;">
+  <div class="section-label">Notre vision pour l'ONMB</div>
+  <div class="pillars">
+    <div class="pillar"><div class="pillar-num">01</div><div class="pillar-text">Protéger le médecin face aux risques judiciaires et professionnels</div></div>
+    <div class="pillar"><div class="pillar-num">02</div><div class="pillar-text">Garantir la sécurité des patients et la qualité des soins</div></div>
+    <div class="pillar"><div class="pillar-num">03</div><div class="pillar-text">Accompagner les jeunes médecins et freiner la fuite des cerveaux</div></div>
+    <div class="pillar"><div class="pillar-num">04</div><div class="pillar-text">Valoriser notre métier et défendre nos conditions d'exercice</div></div>
+    <div class="pillar"><div class="pillar-num">05</div><div class="pillar-text">Renforcer la confiance médecin–patient, base de notre système de santé</div></div>
+  </div>
+</div>
+
+<div style="margin-bottom:1.5rem;">
+  <div class="section-label">Composition de la liste</div>
+  <div class="team-grid">
+    <div class="member"><div class="avatar av-pres">TC</div><div class="member-name">Dr TOHOUENOU Christian</div><span class="role-tag rt-pres">Président</span></div>
+    <div class="member"><div class="avatar av-vp">AB</div><div class="member-name">Dr ADJADI BAKARI Ayodele</div><span class="role-tag rt-vp">Vice-présidente</span></div>
+    <div class="member"><div class="avatar av-rap">KD</div><div class="member-name">Dr KETEHOUNDJE Désiré</div><span class="role-tag rt-rap">Rapporteur</span></div>
+    <div class="member"><div class="avatar av-mem">GR</div><div class="member-name">Dr GAYITO René</div><span class="role-tag rt-mem">Membre</span></div>
+    <div class="member"><div class="avatar av-mem">BT</div><div class="member-name">Dr BEHETON Todoegnon</div><span class="role-tag rt-mem">Membre</span></div>
+    <div class="member"><div class="avatar av-sup">AG</div><div class="member-name">Dr AKPO Gisèle</div><span class="role-tag rt-sup">Suppléante</span></div>
+    <div class="member"><div class="avatar av-sup">LI</div><div class="member-name">Dr LOKOSSI Iréné</div><span class="role-tag rt-sup">Suppléant</span></div>
+  </div>
+</div>
+
+<div class="generator" id="gen">
+  <div class="gen-head">Générez votre badge de soutien</div>
+  <div class="gen-desc">Entrez votre nom, ajoutez votre photo et téléchargez votre image à partager.</div>
+  <div class="gen-wrap">
+    <canvas id="bc" width="280" height="280"></canvas>
+    <div class="gen-fields">
+      <label class="field-lbl">Votre nom complet</label>
+      <input class="field-inp" id="ni" type="text" placeholder="Dr Dupont Jean" oninput="draw()">
+      <label class="field-lbl">Spécialité (optionnel)</label>
+      <input class="field-inp" id="si" type="text" placeholder="Médecin généraliste" oninput="draw()">
+      <label class="file-lbl" for="fi">+ Ajouter votre photo</label>
+      <input type="file" id="fi" accept="image/*" onchange="loadPic(event)">
+      <button class="dl-btn" id="dlBtn" onclick="dlBadge()">Télécharger mon badge</button>
+      <div class="dl-status" id="dlStatus"></div>
+    </div>
+  </div>
+</div>
+
+<div class="slogan">
+  <p>Ne subissons plus. Mobilisons-nous. Engageons-nous.<br>
+  <span>Ensemble, faisons IMPACT.</span></p>
+</div>
+
+<div class="footer-strip">
+  <img src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
+  <span>Élections ordinales ONMB 2026 · Vote en ligne sécurisé</span>
+  <a href="https://ordremedecinsbenin.bj" target="_blank" style="color:#1D9E75;font-size:11px;">ordremedecinsbenin.bj</a>
+</div>
+
+<script>
+const cv = document.getElementById('bc');
+const cx = cv.getContext('2d');
+let photo = null;
+let ready = false;
+
+function loadPic(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    const img = new Image();
+    img.onload = () => { photo = img; draw(); };
+    img.src = ev.target.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function rr(ctx, x, y, w, h, rad) {
+  ctx.beginPath();
+  ctx.moveTo(x+rad, y); ctx.lineTo(x+w-rad, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+rad);
+  ctx.lineTo(x+w, y+h-rad);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-rad, y+h);
+  ctx.lineTo(x+rad, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-rad);
+  ctx.lineTo(x, y+rad);
+  ctx.quadraticCurveTo(x, y, x+rad, y);
+  ctx.closePath();
+}
+
+function wt(ctx, text, x, y, mw, lh) {
+  const words = text.split(' ');
+  let line = '';
+  for (let n = 0; n < words.length; n++) {
+    const test = line + words[n] + ' ';
+    if (ctx.measureText(test).width > mw && n > 0) {
+      ctx.fillText(line.trim(), x, y);
+      line = words[n] + ' '; y += lh;
+    } else { line = test; }
+  }
+  ctx.fillText(line.trim(), x, y);
+}
+
+function drawContent() {
+  const W = 280, H = 280;
+  cx.clearRect(0, 0, W, H);
+
+  cx.fillStyle = '#085041';
+  rr(cx, 0, 0, W, H, 14); cx.fill();
+
+  cx.fillStyle = '#0F6E56';
+  cx.fillRect(0, H * 0.62, W, H * 0.38);
+  rr(cx, 0, 0, W, H, 14); cx.clip();
+  cx.fillStyle = '#0F6E56';
+  cx.fillRect(0, H * 0.62, W, H * 0.38);
+
+  cx.restore();
+  cx.save();
+  rr(cx, 0, 0, W, H, 14); cx.clip();
+
+  const ps = 95, px = (W - ps) / 2, py = 18;
+  cx.save();
+  cx.beginPath(); cx.arc(px + ps/2, py + ps/2, ps/2, 0, Math.PI*2); cx.clip();
+  if (photo) {
+    const s = Math.min(photo.width, photo.height);
+    cx.drawImage(photo, (photo.width-s)/2, (photo.height-s)/2, s, s, px, py, ps, ps);
+  } else {
+    cx.fillStyle = 'rgba(255,255,255,0.15)';
+    cx.fillRect(px, py, ps, ps);
+    cx.fillStyle = 'rgba(255,255,255,0.5)';
+    cx.font = '11px sans-serif'; cx.textAlign = 'center';
+    cx.fillText('Votre photo', W/2, py + ps/2 - 4);
+    cx.fillText('ici', W/2, py + ps/2 + 12);
+  }
+  cx.restore();
+
+  cx.strokeStyle = 'rgba(255,255,255,0.6)';
+  cx.lineWidth = 2.5;
+  cx.beginPath(); cx.arc(W/2, py + ps/2, ps/2 + 2, 0, Math.PI*2); cx.stroke();
+
+  const name = document.getElementById('ni').value.trim() || 'Dr Votre Nom';
+  const spec = document.getElementById('si').value.trim();
+
+  cx.fillStyle = '#fff';
+  cx.font = '500 13px sans-serif'; cx.textAlign = 'center';
+  wt(cx, name, W/2, py + ps + 18, 220, 18);
+
+  if (spec) {
+    cx.fillStyle = 'rgba(255,255,255,0.75)';
+    cx.font = '11px sans-serif';
+    cx.fillText(spec, W/2, py + ps + 40);
+  }
+
+  cx.fillStyle = 'rgba(255,255,255,0.3)';
+  cx.fillRect(30, H * 0.645, W - 60, 0.5);
+
+  cx.fillStyle = 'rgba(255,255,255,0.75)';
+  cx.font = '12px sans-serif'; cx.textAlign = 'center';
+  cx.fillText('Je vote liste', W/2, H * 0.695);
+
+  cx.fillStyle = '#fff';
+  cx.font = 'bold 26px sans-serif';
+  cx.fillText('IMPACT', W/2, H * 0.695 + 28);
+
+  cx.fillStyle = 'rgba(255,255,255,0.45)';
+  cx.font = '9px sans-serif';
+  cx.fillText('Élections ordinales ONMB 2026', W/2, H - 12);
+
+  cx.restore();
+  ready = true;
+}
+
+function draw() {
+  ready = false;
+  drawContent();
+}
+
+function dlBadge() {
+  if (!ready) { draw(); }
+  const status = document.getElementById('dlStatus');
+  try {
+    const dataURL = cv.toDataURL('image/png');
+    if (!dataURL || dataURL === 'data:,') {
+      status.textContent = 'Erreur : canvas vide.';
+      return;
+    }
+    const link = document.createElement('a');
+    link.download = 'badge-impact-onmb.png';
+    link.href = dataURL;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    status.textContent = 'Badge téléchargé avec succès !';
+    setTimeout(() => { status.textContent = ''; }, 3000);
+  } catch(err) {
+    status.textContent = 'Erreur de téléchargement : ' + err.message;
+  }
+}
+
+draw();
+</script>
