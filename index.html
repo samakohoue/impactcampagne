@@ -4,556 +4,638 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Liste IMPACT — Élections ONMB 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --g0: #021A10;
-  --g1: #063D2C;
-  --g2: #0F6E56;
-  --g3: #1D9E75;
-  --g4: #5DCAA5;
-  --g5: #A8E6D0;
-  --g6: #E1F5EE;
-  --cream: #F8F6F1;
-  --ink: #0A1A12;
-  --ink2: #3D5248;
-  --ink3: #7A9186;
-  --white: #FFFFFF;
-  --gold: #C9A84C;
+  --noir: #090C0B;
+  --noir2: #111714;
+  --noir3: #1C2420;
+  --or: #C4972A;
+  --or2: #E8B84B;
+  --or3: #F5D78A;
+  --or-pale: rgba(196,151,42,0.08);
+  --blanc: #DFF3FF;
+  --blanc2: #CBE9F7;
+  --gris: #4A5550;
+  --gris2: #7A887E;
+  --vert: #1A3C2F;
+  --vert2: #2A5942;
+  --vert3: #3D8060;
+  --vert-pale: rgba(26,60,47,0.06);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Outfit', system-ui, sans-serif;
+  --r: 12px;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--blanc);
+  color: var(--noir);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--or3); color: var(--noir); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--or); }
 
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--cream);}
-::-webkit-scrollbar-thumb{background:var(--g3);border-radius:2px;}
+/* ══════ NAV ══════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px;
+  background: rgba(223,243,255,0.92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(196,151,42,0.15);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.nav.scrolled {
+  background: rgba(223,243,255,0.98);
+  box-shadow: 0 1px 24px rgba(0,0,0,0.07);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 14px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 38px; height: 38px;
+  border: 1.5px solid var(--or);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.nav-logo-mark::before {
+  content: '';
+  position: absolute; inset: 3px;
+  border: 1px solid rgba(196,151,42,0.3);
+  border-radius: 5px;
+}
+.nav-logo-i {
+  font-family: var(--serif);
+  font-size: 20px; font-weight: 700;
+  color: var(--or); line-height: 1;
+}
+.nav-logo-text { line-height: 1.2; }
+.nav-logo-name { font-size: 13px; font-weight: 600; color: var(--noir); letter-spacing: 0.5px; }
+.nav-logo-sub { font-size: 10px; color: var(--gris2); letter-spacing: 0.3px; }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a { font-size: 13px; font-weight: 400; color: var(--gris); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+.nav-links a:hover { color: var(--or); }
+.nav-cta {
+  background: var(--noir);
+  color: var(--or) !important;
+  font-size: 12px !important; font-weight: 600 !important;
+  padding: 10px 22px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: all 0.25s !important;
+}
+.nav-cta:hover { background: var(--or) !important; color: var(--noir) !important; }
 
-/* ─── NAV ─── */
-.nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;height:68px;
-  background:rgba(248,246,241,0.95);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(10,26,18,0.07);
-  position:sticky;top:0;z-index:200;
+/* burger */
+.nav-burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 40px; height: 40px; cursor: pointer;
+  background: transparent; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;
 }
-.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-logo{height:38px;object-fit:contain;}
-.nav-brand-name{font-size:13px;font-weight:700;color:var(--g1);letter-spacing:0.3px;}
-.nav-brand-sub{font-size:10px;color:var(--ink3);margin-top:1px;}
-.nav-links{display:flex;align-items:center;gap:32px;}
-.nav-links a{font-size:13px;font-weight:500;color:var(--ink2);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--g3);}
-.nav-vote{
-  background:var(--g1);color:#fff;
-  font-size:13px;font-weight:600;padding:10px 22px;
-  border-radius:999px;text-decoration:none;
-  transition:background .2s,transform .15s;
+.bb { display: block; width: 18px; height: 1.5px; background: var(--noir); border-radius: 2px; margin: 0 auto; transition: all 0.3s; }
+.nav-burger.open .bb:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open .bb:nth-child(2) { opacity: 0; }
+.nav-burger.open .bb:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-drawer {
+  display: none; position: fixed; top: 72px; inset-inline: 0; bottom: 0; z-index: 499;
+  background: #DFF3FF; flex-direction: column; padding: 40px 28px;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
 }
-.nav-vote:hover{background:var(--g2);transform:translateY(-1px);}
+.nav-drawer.open { opacity: 1; pointer-events: all; }
+.drawer-a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+  font-family: var(--serif); font-size: 26px; font-weight: 600;
+  color: var(--noir); text-decoration: none; letter-spacing: -0.5px;
+  transition: color 0.2s;
+}
+.drawer-a:hover { color: var(--or); }
+.drawer-cta-wrap { margin-top: 32px; }
+.drawer-cta {
+  display: block; text-align: center;
+  background: var(--noir); color: var(--or);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 18px 28px; border-radius: 999px; text-decoration: none;
+  transition: background 0.2s;
+}
+.drawer-cta:hover { background: var(--or); color: var(--noir); }
 
-/* ─── HAMBURGER ─── */
-.nav-burger{
-  display:none;
-  flex-direction:column;justify-content:center;align-items:center;
-  width:44px;height:44px;border-radius:12px;
-  background:transparent;border:1px solid rgba(10,26,18,0.1);
-  cursor:pointer;gap:5px;transition:background .2s;
-  flex-shrink:0;
+/* ══════ HERO ══════ */
+.hero {
+  min-height: 100svh;
+  background: var(--noir);
+  position: relative; overflow: hidden;
+  display: grid; grid-template-rows: 1fr auto;
+  padding-top: 72px;
 }
-.nav-burger:hover{background:var(--g6);}
-.burger-bar{
-  display:block;width:20px;height:2px;
-  background:var(--g1);border-radius:2px;
-  transition:transform .3s ease, opacity .3s ease;
-  transform-origin:center;
-}
-.nav-burger.open .burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open .burger-bar:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-burger.open .burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-/* ─── MOBILE DRAWER ─── */
-.nav-drawer{
-  display:none;
-  position:fixed;top:68px;left:0;right:0;bottom:0;
-  background:rgba(248,246,241,0.98);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  z-index:199;
-  flex-direction:column;
-  padding:32px 28px;
-  gap:0;
-  transform:translateY(-12px);
-  opacity:0;
-  transition:opacity .25s ease, transform .25s ease;
-  pointer-events:none;
-}
-.nav-drawer.open{
-  opacity:1;transform:translateY(0);pointer-events:all;
-}
-.drawer-link{
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:22px;font-weight:700;color:var(--ink);
-  text-decoration:none;
-  padding:18px 0;
-  border-bottom:1px solid rgba(10,26,18,0.07);
-  font-family:'Playfair Display',serif;
-  letter-spacing:-0.5px;
-  transition:color .2s;
-}
-.drawer-link:hover{color:var(--g3);}
-.drawer-link-arrow{font-size:16px;color:var(--ink3);transition:transform .2s;}
-.drawer-link:hover .drawer-link-arrow{transform:translateX(4px);}
-.drawer-cta{
-  margin-top:28px;
-  background:var(--g1);color:#fff;
-  font-size:16px;font-weight:700;
-  padding:18px 28px;border-radius:999px;
-  text-decoration:none;text-align:center;
-  transition:background .2s;
-  font-family:'Plus Jakarta Sans',sans-serif;
-}
-.drawer-cta:hover{background:var(--g2);}
-.drawer-footer{
-  margin-top:auto;padding-top:24px;
-  font-size:11px;color:var(--ink3);
-  display:flex;align-items:center;gap:8px;
-}
-.drawer-footer a{color:var(--g2);text-decoration:none;font-weight:600;}
-
-/* ─── HERO ─── */
-.hero{
-  min-height:100vh;
-  display:grid;grid-template-rows:1fr auto;
-  background:var(--g0);
-  position:relative;overflow:hidden;
-}
-.hero-bg-circle1{
-  position:absolute;top:-200px;right:-200px;
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle, rgba(29,158,117,0.18) 0%, transparent 70%);
-  pointer-events:none;
-}
-.hero-bg-circle2{
-  position:absolute;bottom:-150px;left:-100px;
-  width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle, rgba(93,202,165,0.1) 0%, transparent 70%);
-  pointer-events:none;
-}
-.hero-bg-lines{
-  position:absolute;inset:0;
+/* Pattern géométrique béninois */
+.hero-pattern {
+  position: absolute; inset: 0; pointer-events: none;
+  opacity: 0.035;
   background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size:80px 80px;
-  pointer-events:none;
+    repeating-linear-gradient(45deg, #C4972A 0, #C4972A 1px, transparent 0, transparent 50%),
+    repeating-linear-gradient(-45deg, #C4972A 0, #C4972A 1px, transparent 0, transparent 50%);
+  background-size: 28px 28px;
 }
-.hero-content{
-  display:grid;grid-template-columns:1fr 480px;
-  align-items:center;gap:60px;
-  max-width:1280px;margin:0 auto;
-  padding:120px 60px 80px;
-  position:relative;z-index:1;
+.hero-orb1 {
+  position: absolute; top: -20%; right: -10%;
+  width: 60vw; max-width: 700px; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(196,151,42,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  margin-bottom:28px;
+.hero-orb2 {
+  position: absolute; bottom: -15%; left: -5%;
+  width: 40vw; max-width: 500px; aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(61,128,96,0.1) 0%, transparent 70%);
+  pointer-events: none;
 }
-.eyebrow-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--g4);
-  box-shadow:0 0 12px var(--g3);
-  animation:glow 2s ease-in-out infinite;
-}
-@keyframes glow{0%,100%{box-shadow:0 0 8px var(--g3);}50%{box-shadow:0 0 20px var(--g4);}}
-.eyebrow-text{
-  font-size:11px;font-weight:600;letter-spacing:3px;
-  text-transform:uppercase;color:var(--g4);
-}
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(72px,9vw,130px);
-  font-weight:900;
-  color:#fff;
-  line-height:0.9;
-  letter-spacing:-4px;
-  margin-bottom:6px;
-}
-.hero-title-italic{
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  font-size:clamp(28px,4vw,52px);
-  font-weight:700;
-  color:var(--g4);
-  letter-spacing:-1px;
-  margin-bottom:36px;
-  line-height:1.2;
-}
-.hero-desc{
-  font-size:17px;line-height:1.8;
-  color:rgba(255,255,255,0.55);
-  max-width:480px;margin-bottom:48px;
-  font-weight:300;
-}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-hero-primary{
-  background:var(--g3);color:#fff;
-  font-size:14px;font-weight:700;
-  padding:16px 32px;border-radius:999px;
-  text-decoration:none;border:none;cursor:pointer;
-  transition:all .2s;letter-spacing:0.3px;
-  font-family:'Plus Jakarta Sans',sans-serif;
-}
-.btn-hero-primary:hover{background:var(--g4);transform:translateY(-2px);box-shadow:0 12px 32px rgba(29,158,117,0.4);}
-.btn-hero-ghost{
-  background:transparent;color:rgba(255,255,255,0.7);
-  font-size:14px;font-weight:500;
-  padding:16px 32px;border-radius:999px;
-  border:1px solid rgba(255,255,255,0.15);
-  text-decoration:none;cursor:pointer;
-  transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif;
-}
-.btn-hero-ghost:hover{background:rgba(255,255,255,0.07);color:#fff;}
 
-/* Hero right card */
-.hero-card{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:28px;
-  padding:36px;
-  backdrop-filter:blur(10px);
+/* Large decorative IMPACT text */
+.hero-deco-text {
+  position: absolute; bottom: -2%; right: -2%;
+  font-family: var(--serif);
+  font-size: clamp(120px, 18vw, 260px);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(196,151,42,0.08);
+  letter-spacing: -8px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
 }
-.hc-quote-mark{
-  font-family:'Playfair Display',serif;
-  font-size:80px;line-height:0.6;
-  color:var(--g3);margin-bottom:20px;
-  display:block;
-}
-.hc-quote{
-  font-family:'Playfair Display',serif;
-  font-size:21px;line-height:1.6;
-  color:rgba(255,255,255,0.9);
-  font-style:italic;margin-bottom:28px;
-}
-.hc-divider{
-  height:1px;background:rgba(255,255,255,0.08);
-  margin-bottom:24px;
-}
-.hc-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.hc-stat-num{
-  font-family:'Playfair Display',serif;
-  font-size:38px;font-weight:700;color:#fff;
-  line-height:1;margin-bottom:4px;
-}
-.hc-stat-num span{font-size:22px;color:var(--g4);}
-.hc-stat-lbl{font-size:12px;color:rgba(255,255,255,0.4);font-weight:400;}
 
-/* Hero scroll indicator */
-.hero-scroll{
-  display:flex;align-items:center;justify-content:center;
-  padding:28px;border-top:1px solid rgba(255,255,255,0.06);
-  position:relative;z-index:1;gap:10px;
+.hero-body {
+  max-width: 1300px; margin: 0 auto; padding: 80px 56px 60px;
+  width: 100%; position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
 }
-.scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2);}
-.scroll-text{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;}
 
-/* ─── ONMB BAND ─── */
-.onmb-band{
-  background:var(--white);
-  border-bottom:1px solid rgba(10,26,18,0.07);
-  padding:20px 60px;
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px; margin-bottom: 36px;
 }
-.onmb-band-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+.hero-eyebrow-line { width: 32px; height: 1px; background: var(--or); }
+.hero-eyebrow-text {
+  font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--or);
 }
-.onmb-logo{height:48px;object-fit:contain;}
-.onmb-info{flex:1;min-width:200px;}
-.onmb-name{font-size:14px;font-weight:700;color:var(--ink);}
-.onmb-desc{font-size:12px;color:var(--ink3);margin-top:2px;line-height:1.5;}
-.onmb-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
-.tag{font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;}
-.tag-green{background:var(--g6);color:var(--g1);}
-.tag-outline{background:transparent;border:1px solid rgba(10,26,18,0.12);color:var(--ink2);}
-.onmb-link{
-  font-size:12px;font-weight:600;color:var(--g2);
-  text-decoration:none;display:flex;align-items:center;gap:6px;
-  white-space:nowrap;
-  padding:10px 18px;border:1px solid var(--g5);
-  border-radius:999px;transition:all .2s;
-}
-.onmb-link:hover{background:var(--g6);}
 
-/* ─── SECTION BASE ─── */
-.section{max-width:1280px;margin:0 auto;padding:100px 60px;}
-.sec-tag{
-  font-size:11px;font-weight:700;letter-spacing:3px;
-  text-transform:uppercase;color:var(--g3);
-  display:flex;align-items:center;gap:10px;margin-bottom:16px;
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(80px, 10vw, 148px);
+  font-weight: 700; line-height: 0.88;
+  color: var(--blanc);
+  letter-spacing: -5px;
+  margin-bottom: 12px;
 }
-.sec-tag::before{content:'';display:block;width:24px;height:2px;background:var(--g3);}
-.sec-h{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(36px,4.5vw,58px);
-  color:var(--ink);line-height:1.1;
-  letter-spacing:-1.5px;margin-bottom:20px;
+.hero-h1-sub {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 40px);
+  font-weight: 300; font-style: italic;
+  color: var(--or2);
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  margin-bottom: 44px;
 }
-.sec-p{font-size:16px;color:var(--ink3);line-height:1.8;max-width:520px;margin-bottom:56px;}
+.hero-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: rgba(247,244,239,0.45);
+  max-width: 460px; margin-bottom: 52px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--or); color: var(--noir);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  padding: 16px 32px; border-radius: 999px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.25s; font-family: var(--sans);
+}
+.btn-primary:hover { background: var(--or2); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(196,151,42,0.3); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: rgba(247,244,239,0.6);
+  font-size: 13px; font-weight: 400;
+  padding: 16px 32px; border-radius: 999px;
+  border: 1px solid rgba(247,244,239,0.12);
+  text-decoration: none; cursor: pointer;
+  transition: all 0.25s; font-family: var(--sans);
+}
+.btn-ghost:hover { background: rgba(247,244,239,0.06); color: var(--blanc); }
 
-/* ─── VISION ─── */
-.vision-wrap{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;}
-.vision-left{position:sticky;top:88px;}
-.vision-items{display:flex;flex-direction:column;gap:2px;}
-.vision-item{
-  background:var(--white);
-  padding:32px 36px;
-  border-left:3px solid transparent;
-  transition:all .25s;
-  cursor:default;
+/* Hero right panel */
+.hero-panel {
+  background: rgba(247,244,239,0.03);
+  border: 1px solid rgba(196,151,42,0.2);
+  border-radius: 24px;
+  padding: 40px 36px;
+  position: relative; overflow: hidden;
 }
-.vision-item:first-child{border-radius:20px 20px 0 0;}
-.vision-item:last-child{border-radius:0 0 20px 20px;}
-.vision-item:hover{border-left-color:var(--g3);background:var(--g6);}
-.vi-num{
-  font-family:'Playfair Display',serif;
-  font-size:52px;font-weight:900;
-  color:rgba(10,26,18,0.06);
-  line-height:1;margin-bottom:12px;
-  transition:color .25s;
+.hero-panel::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--or), var(--or3), transparent);
 }
-.vision-item:hover .vi-num{color:var(--g5);}
-.vi-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
-.vi-desc{font-size:13px;color:var(--ink3);line-height:1.7;}
+.panel-quote-mark {
+  font-family: var(--serif);
+  font-size: 100px; line-height: 0.5;
+  color: var(--or); opacity: 0.4;
+  display: block; margin-bottom: 16px;
+}
+.panel-quote {
+  font-family: var(--serif);
+  font-size: 20px; font-weight: 300; font-style: italic;
+  line-height: 1.7; color: rgba(247,244,239,0.8);
+  margin-bottom: 36px;
+}
+.panel-sep { height: 1px; background: rgba(196,151,42,0.15); margin-bottom: 32px; }
+.panel-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.pstat-n {
+  font-family: var(--serif);
+  font-size: 44px; font-weight: 600;
+  color: var(--blanc); line-height: 1;
+  margin-bottom: 6px;
+}
+.pstat-n span { font-size: 24px; color: var(--or); }
+.pstat-l { font-size: 11px; color: rgba(247,244,239,0.3); font-weight: 300; letter-spacing: 0.3px; }
 
-/* ─── TEAM ─── */
-.team-section{background:var(--g0);padding:100px 0;}
-.team-inner{max-width:1280px;margin:0 auto;padding:0 60px;}
-.team-section .sec-tag{color:var(--g4);}
-.team-section .sec-tag::before{background:var(--g4);}
-.team-section .sec-h{color:#fff;}
-.team-section .sec-p{color:rgba(255,255,255,0.4);}
-.team-grid{
-  display:grid;
-  grid-template-columns:2fr repeat(6,1fr);
-  gap:14px;align-items:stretch;
+.hero-footer {
+  border-top: 1px solid rgba(247,244,239,0.05);
+  padding: 28px 56px;
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  position: relative; z-index: 2;
 }
-.member{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:20px;padding:28px 20px;
-  text-align:center;
-  transition:all .25s;
-}
-.member:hover{
-  background:rgba(255,255,255,0.08);
-  border-color:rgba(93,202,165,0.3);
-  transform:translateY(-4px);
-}
-.member-president{
-  background:linear-gradient(160deg, rgba(29,158,117,0.25), rgba(6,61,44,0.6));
-  border-color:rgba(29,158,117,0.4);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:36px 28px;
-}
-.av{
-  width:56px;height:56px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;font-weight:700;margin:0 auto 14px;
-}
-.av-pres{
-  width:72px;height:72px;font-size:20px;
-  background:var(--g3);color:#fff;
-  box-shadow:0 0 0 4px rgba(29,158,117,0.2);
-}
-.av-std{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);}
-.m-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);line-height:1.4;margin-bottom:8px;}
-.m-name-big{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
-.m-dept{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px;}
-.badge{
-  display:inline-block;font-size:10px;font-weight:700;
-  padding:4px 12px;border-radius:999px;letter-spacing:0.5px;
-}
-.b-pres{background:var(--g3);color:#fff;}
-.b-vp{background:rgba(55,138,221,0.2);color:#85B7EB;}
-.b-rap{background:rgba(186,117,23,0.2);color:#FAC775;}
-.b-mem{background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);}
-.b-sup{background:rgba(212,83,126,0.15);color:#ED93B1;}
+.hf-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(196,151,42,0.4); }
+.hf-text { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: rgba(247,244,239,0.2); }
 
-/* ─── GENERATOR ─── */
-.gen-section{padding:100px 0;background:var(--cream);}
-.gen-inner{max-width:1280px;margin:0 auto;padding:0 60px;}
-.gen-layout{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;align-items:center;
-  margin-top:60px;
+/* ══════ ONMB RIBBON ══════ */
+.ribbon {
+  background: #DFF3FF;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  padding: 18px 56px;
 }
-.gen-preview{
-  background:var(--g1);
-  border-radius:32px;
-  padding:40px;
-  display:flex;flex-direction:column;align-items:center;gap:20px;
-  position:relative;overflow:hidden;
+.ribbon-inner {
+  max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
 }
-.gen-preview::before{
-  content:'';position:absolute;
-  top:-80px;right:-80px;width:300px;height:300px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(29,158,117,0.2) 0%,transparent 70%);
+.ribbon-logo { height: 44px; object-fit: contain; opacity: 0.8; }
+.ribbon-name { font-size: 13px; font-weight: 600; color: var(--noir); }
+.ribbon-sub { font-size: 11px; color: var(--gris2); margin-top: 2px; }
+.ribbon-tags { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.rtag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+  padding: 5px 12px; border-radius: 999px;
 }
-#bc{border-radius:20px;display:block;position:relative;z-index:1;max-width:100%;}
-.preview-hint{
-  font-size:11px;color:rgba(255,255,255,0.25);
-  letter-spacing:2px;text-transform:uppercase;
-  position:relative;z-index:1;
+.rtag-gold { background: rgba(196,151,42,0.1); color: #8A6615; border: 1px solid rgba(196,151,42,0.25); }
+.rtag-outline { background: transparent; color: var(--gris); border: 1px solid rgba(0,0,0,0.1); }
+.ribbon-link {
+  font-size: 11px; font-weight: 600; color: var(--vert2);
+  text-decoration: none; display: flex; align-items: center; gap: 5px;
+  padding: 8px 16px; border: 1px solid rgba(26,60,47,0.2); border-radius: 999px;
+  white-space: nowrap; transition: all 0.2s;
 }
-.gen-form{display:flex;flex-direction:column;gap:28px;}
-.f-group{display:flex;flex-direction:column;gap:8px;}
-.f-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--ink2);
-}
-.f-input{
-  background:var(--white);
-  border:1.5px solid rgba(10,26,18,0.1);
-  border-radius:12px;padding:14px 18px;
-  font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;
-  color:var(--ink);outline:none;
-  transition:border-color .2s,box-shadow .2s;
-}
-.f-input:focus{border-color:var(--g3);box-shadow:0 0 0 4px rgba(29,158,117,0.1);}
-.f-input::placeholder{color:var(--ink3);}
-.upload-zone{
-  border:2px dashed rgba(10,26,18,0.12);
-  border-radius:16px;padding:32px 20px;
-  text-align:center;cursor:pointer;
-  transition:all .2s;background:var(--white);
-}
-.upload-zone:hover{border-color:var(--g3);background:var(--g6);}
-.upload-icon{
-  width:48px;height:48px;border-radius:50%;
-  background:var(--g6);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 12px;font-size:20px;
-}
-.upload-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
-.upload-sub{font-size:12px;color:var(--ink3);}
-.upload-selected{font-size:12px;color:var(--g2);font-weight:500;margin-top:10px;}
-#fi{display:none;}
-.btn-download{
-  background:var(--g1);color:#fff;
-  font-size:15px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
-  padding:18px 36px;border-radius:999px;
-  border:none;cursor:pointer;width:100%;
-  transition:all .2s;letter-spacing:0.3px;
-}
-.btn-download:hover{background:var(--g2);transform:translateY(-2px);box-shadow:0 16px 40px rgba(6,61,44,0.25);}
-.btn-download:active{transform:scale(0.98);}
-.dl-confirm{
-  font-size:13px;text-align:center;color:var(--g2);
-  font-weight:500;min-height:20px;
-  transition:opacity .4s;opacity:0;
-}
-.dl-confirm.show{opacity:1;}
+.ribbon-link:hover { background: var(--vert-pale); }
 
-/* ─── SLOGAN ─── */
-.slogan-section{
-  background:var(--g1);
-  padding:120px 60px;text-align:center;
-  position:relative;overflow:hidden;
+/* ══════ SECTIONS BASE ══════ */
+.sec { max-width: 1300px; margin: 0 auto; padding: 120px 56px; }
+.sec-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--or);
+  margin-bottom: 20px;
 }
-.slogan-section::before{
-  content:'';position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:60px 60px;
+.sec-tag::before { content: ''; display: block; width: 20px; height: 1px; background: var(--or); }
+.sec-h {
+  font-family: var(--serif);
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 600; line-height: 1.05;
+  letter-spacing: -2px; color: var(--noir);
+  margin-bottom: 24px;
 }
-.slogan-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
-.slogan-word{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(36px,5.5vw,72px);
-  color:#fff;line-height:1.15;
-  letter-spacing:-2px;
-  display:block;
-  opacity:0;transform:translateY(20px);
-  transition:opacity .6s ease, transform .6s ease;
-}
-.slogan-word.visible{opacity:1;transform:translateY(0);}
-.slogan-word.accent{color:var(--g4);font-style:italic;}
-.slogan-cta{
-  margin-top:52px;
-  display:flex;flex-direction:column;align-items:center;gap:16px;
-}
-.slogan-sub{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:540px;}
-.btn-slogan{
-  background:#fff;color:var(--g1);
-  font-size:14px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;
-  padding:16px 36px;border-radius:999px;
-  text-decoration:none;transition:all .2s;
-  display:inline-block;margin-top:8px;
-}
-.btn-slogan:hover{background:var(--g6);transform:translateY(-2px);}
+.sec-h em { font-style: italic; color: var(--vert2); }
+.sec-p { font-size: 15px; font-weight: 300; color: var(--gris2); line-height: 1.9; max-width: 480px; margin-bottom: 60px; }
 
-/* ─── FOOTER ─── */
-.footer{background:var(--g0);padding:32px 60px;}
-.footer-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+/* ══════ VISION ══════ */
+.vision-bg { background: #EAF7FF; }
+.vision-layout { display: grid; grid-template-columns: 340px 1fr; gap: 96px; align-items: start; }
+.vision-sticky { position: sticky; top: 96px; }
+.vision-items { display: flex; flex-direction: column; }
+.vi {
+  padding: 36px 40px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: start;
+  transition: background 0.25s, border-left 0.25s;
+  border-left: 3px solid transparent;
+  cursor: default;
+  background: rgba(255,255,255,0.6);
 }
-.footer-logo{height:32px;opacity:0.5;}
-.footer-links{display:flex;gap:20px;}
-.footer-links a{font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color .2s;}
-.footer-links a:hover{color:var(--g4);}
-.footer-copy{font-size:11px;color:rgba(255,255,255,0.2);}
+.vi:first-child { border-top: 1px solid rgba(0,0,0,0.06); }
+.vi:hover { background: rgba(196,151,42,0.04); border-left-color: var(--or); }
+.vi-num {
+  font-family: var(--serif);
+  font-size: 48px; font-weight: 700; line-height: 1;
+  color: rgba(0,0,0,0.07);
+  transition: color 0.25s;
+  padding-top: 4px;
+}
+.vi:hover .vi-num { color: rgba(196,151,42,0.3); }
+.vi-title { font-size: 15px; font-weight: 600; color: var(--noir); margin-bottom: 10px; }
+.vi-desc { font-size: 13px; font-weight: 300; color: var(--gris2); line-height: 1.8; }
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:1100px){
-  .hero-content{grid-template-columns:1fr;padding:80px 40px 60px;}
-  .hero-card{display:none;}
-  .vision-wrap{grid-template-columns:1fr;}
-  .vision-left{position:static;}
-  .team-grid{grid-template-columns:repeat(4,1fr);}
-  .member-president{grid-column:span 2;}
-  .gen-layout{grid-template-columns:1fr;}
-  .gen-preview{order:-1;}
-  .section{padding:80px 40px;}
-  .team-inner{padding:0 40px;}
-  .gen-inner{padding:0 40px;}
-  .onmb-band{padding:20px 40px;}
-  .slogan-section{padding:80px 40px;}
-  .footer{padding:28px 40px;}
+/* ══════ TEAM ══════ */
+.team-bg { background: var(--noir2); }
+.team-bg .sec-tag { color: var(--or); }
+.team-bg .sec-h { color: var(--blanc); }
+.team-bg .sec-h em { color: var(--or2); }
+.team-bg .sec-p { color: rgba(247,244,239,0.3); }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
 }
-@media(max-width:700px){
-  .nav{padding:0 20px;}
-  .nav-links{display:none;}
-  .nav-burger{display:flex;}
-  .nav-drawer{display:flex;}
-  .hero-content{padding:60px 24px 40px;}
-  .hero-title{font-size:72px;letter-spacing:-3px;}
-  .team-grid{grid-template-columns:repeat(2,1fr);}
-  .member-president{grid-column:span 2;}
-  .section{padding:60px 24px;}
-  .team-inner,.gen-inner{padding:0 24px;}
-  .onmb-band{padding:16px 24px;}
-  .slogan-section{padding:60px 24px;}
-  .footer{padding:24px;}
-  .footer-inner{flex-direction:column;text-align:center;}
-  .footer-links{justify-content:center;}
+.m-card {
+  background: rgba(247,244,239,0.03);
+  border: 1px solid rgba(247,244,239,0.07);
+  border-radius: 16px;
+  padding: 28px 16px 24px;
+  text-align: center;
+  transition: all 0.25s;
+  position: relative; overflow: hidden;
 }
-@media(max-width:480px){
-  .team-grid{grid-template-columns:1fr 1fr;}
-  .hero-title{font-size:58px;}
+.m-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: transparent;
+  transition: background 0.25s;
 }
+.m-card:hover { background: rgba(247,244,239,0.06); border-color: rgba(196,151,42,0.2); transform: translateY(-4px); }
+.m-card:hover::before { background: var(--or); }
+.m-pres {
+  grid-column: span 2;
+  background: linear-gradient(160deg, rgba(196,151,42,0.12), rgba(196,151,42,0.04));
+  border-color: rgba(196,151,42,0.3);
+  padding: 40px 28px 36px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.m-pres::before { background: var(--or); }
+.av {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 600;
+  margin: 0 auto 16px;
+  font-family: var(--serif);
+  flex-shrink: 0;
+}
+.av-gold {
+  width: 68px; height: 68px; font-size: 20px;
+  background: var(--or);
+  color: var(--noir);
+  box-shadow: 0 0 0 3px rgba(196,151,42,0.2), 0 0 0 6px rgba(196,151,42,0.08);
+}
+.av-std { background: rgba(247,244,239,0.07); color: rgba(247,244,239,0.5); }
+.m-name { font-size: 11px; font-weight: 500; color: rgba(247,244,239,0.75); line-height: 1.4; margin-bottom: 12px; }
+.m-name-big { font-size: 15px; font-weight: 600; color: var(--blanc); margin-bottom: 6px; font-family: var(--serif); }
+.m-dept { font-size: 11px; color: rgba(247,244,239,0.3); margin-bottom: 16px; }
+.badge {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px;
+}
+.b-or { background: rgba(196,151,42,0.2); color: var(--or2); border: 1px solid rgba(196,151,42,0.3); }
+.b-bleu { background: rgba(100,149,237,0.1); color: #9BB3E8; border: 1px solid rgba(100,149,237,0.2); }
+.b-rap { background: rgba(210,160,80,0.1); color: #D2A050; border: 1px solid rgba(210,160,80,0.2); }
+.b-mem { background: rgba(247,244,239,0.05); color: rgba(247,244,239,0.35); border: 1px solid rgba(247,244,239,0.1); }
+.b-sup { background: rgba(196,100,130,0.1); color: #C88AA0; border: 1px solid rgba(196,100,130,0.2); }
+
+/* ══════ QUOTE INTERLUDE ══════ */
+.interlude {
+  background: var(--vert);
+  padding: 100px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.interlude-pattern {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(247,244,239,0.8) 0, rgba(247,244,239,0.8) 1px, transparent 0, transparent 100%),
+    repeating-linear-gradient(90deg, rgba(247,244,239,0.8) 0, rgba(247,244,239,0.8) 1px, transparent 0, transparent 100%);
+  background-size: 60px 60px;
+}
+.interlude-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.interlude-qm {
+  font-family: var(--serif);
+  font-size: 120px; line-height: 0.5;
+  color: rgba(196,151,42,0.35); display: block; margin-bottom: 24px;
+}
+.interlude-q {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300; font-style: italic;
+  color: var(--blanc); line-height: 1.4;
+  letter-spacing: -1px; margin-bottom: 36px;
+}
+.interlude-q strong { font-style: normal; font-weight: 600; color: var(--or2); }
+.interlude-sub { font-size: 13px; color: rgba(247,244,239,0.4); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ══════ BADGE GENERATOR ══════ */
+.gen-bg { background: #C8E9F9; }
+.gen-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center;
+}
+.gen-canvas-wrap {
+  background: var(--noir);
+  border-radius: 28px;
+  padding: 44px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.18);
+}
+.gen-canvas-wrap::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+  background-image:
+    repeating-linear-gradient(45deg, #C4972A 0, #C4972A 1px, transparent 0, transparent 28px),
+    repeating-linear-gradient(-45deg, #C4972A 0, #C4972A 1px, transparent 0, transparent 28px);
+}
+#bc { border-radius: 20px; display: block; position: relative; z-index: 1; max-width: 100%; }
+.canvas-hint { font-size: 10px; color: rgba(247,244,239,0.2); letter-spacing: 3px; text-transform: uppercase; position: relative; z-index: 1; }
+
+.gen-form { display: flex; flex-direction: column; gap: 24px; }
+.f-group { display: flex; flex-direction: column; gap: 8px; }
+.f-label { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gris); }
+.f-input {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 14px; font-family: var(--sans); color: var(--noir);
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.f-input:focus { border-color: var(--or); box-shadow: 0 0 0 4px rgba(196,151,42,0.1); }
+.f-input::placeholder { color: #9AB5C5; }
+.upload-zone {
+  border: 1.5px dashed rgba(0,0,0,0.12); border-radius: 14px;
+  padding: 32px 20px; text-align: center; cursor: pointer;
+  transition: all 0.2s; background: rgba(255,255,255,0.7);
+  display: flex; flex-direction: column; align-items: center;
+}
+.upload-zone:hover { border-color: var(--or); background: rgba(255,255,255,0.9); }
+.upload-ico { width: 48px; height: 48px; border-radius: 50%; background: rgba(196,151,42,0.08); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; font-size: 20px; }
+.upload-t { font-size: 13px; font-weight: 500; color: var(--noir); margin-bottom: 4px; }
+.upload-s { font-size: 11px; color: var(--gris2); }
+.upload-sel { font-size: 11px; color: var(--or); font-weight: 500; margin-top: 10px; }
+#fi { display: none; }
+.btn-dl {
+  background: var(--noir); color: var(--or);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 18px 36px; border-radius: 999px; border: none; cursor: pointer;
+  width: 100%; font-family: var(--sans);
+  transition: all 0.25s;
+}
+.btn-dl:hover { background: var(--or); color: var(--noir); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(196,151,42,0.25); }
+.dl-ok { font-size: 12px; text-align: center; color: var(--vert2); font-weight: 500; min-height: 18px; opacity: 0; transition: opacity 0.4s; }
+.dl-ok.show { opacity: 1; }
+
+/* ══════ SLOGAN ══════ */
+.slogan-bg {
+  background: var(--noir);
+  padding: 140px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.slogan-bg::before {
+  content: 'IMPACT';
+  position: absolute; bottom: -5%; left: 50%; transform: translateX(-50%);
+  font-family: var(--serif); font-size: clamp(120px, 20vw, 280px);
+  font-weight: 700; color: transparent;
+  -webkit-text-stroke: 1px rgba(196,151,42,0.05);
+  white-space: nowrap; pointer-events: none; user-select: none;
+  letter-spacing: -8px; line-height: 1;
+}
+.slogan-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+.slogan-line {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 68px);
+  font-weight: 600; line-height: 1.2;
+  color: var(--blanc); letter-spacing: -2px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.slogan-line.visible { opacity: 1; transform: translateY(0); }
+.slogan-line.accent { color: var(--or2); font-style: italic; }
+.slogan-cta { margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.slogan-cta-p { font-size: 15px; font-weight: 300; color: rgba(247,244,239,0.35); max-width: 520px; line-height: 1.8; }
+.btn-slogan {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--or); color: var(--noir);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 18px 40px; border-radius: 999px; text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-slogan:hover { background: var(--or2); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(196,151,42,0.3); }
+
+/* ══════ FOOTER ══════ */
+.footer {
+  background: var(--noir);
+  border-top: 1px solid rgba(196,151,42,0.1);
+  padding: 40px 56px;
+}
+.footer-inner {
+  max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-logo-mark {
+  width: 32px; height: 32px; border: 1px solid rgba(196,151,42,0.3); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.footer-logo-i { font-family: var(--serif); font-size: 16px; font-weight: 700; color: var(--or); }
+.footer-brand-name { font-size: 12px; font-weight: 600; color: rgba(247,244,239,0.5); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 11px; color: rgba(247,244,239,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--or); }
+.footer-copy { font-size: 10px; color: rgba(247,244,239,0.15); letter-spacing: 0.5px; }
+
+/* ══════ DIVIDER ══════ */
+.or-divider {
+  display: flex; align-items: center; gap: 16px;
+  max-width: 1300px; margin: 0 auto; padding: 0 56px;
+}
+.or-line { flex: 1; height: 1px; background: rgba(196,151,42,0.15); }
+.or-diamond {
+  width: 8px; height: 8px;
+  background: var(--or);
+  transform: rotate(45deg); flex-shrink: 0;
+  opacity: 0.4;
+}
+
+/* ══════ RESPONSIVE ══════ */
+@media (max-width: 1100px) {
+  .hero-body { grid-template-columns: 1fr; padding: 60px 40px 40px; }
+  .hero-panel { display: none; }
+  .vision-layout { grid-template-columns: 1fr; }
+  .vision-sticky { position: static; }
+  .team-grid { grid-template-columns: repeat(4, 1fr); }
+  .m-pres { grid-column: span 2; }
+  .gen-layout { grid-template-columns: 1fr; }
+  .gen-canvas-wrap { order: -1; }
+  .sec { padding: 80px 40px; }
+  .ribbon, .nav, .slogan-bg, .footer, .interlude { padding-left: 40px; padding-right: 40px; }
+}
+@media (max-width: 700px) {
+  .nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-drawer { display: flex; }
+  .hero-body { padding: 48px 24px 36px; }
+  .hero-h1 { font-size: 72px; letter-spacing: -3px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .m-pres { grid-column: span 2; }
+  .sec { padding: 60px 24px; }
+  .ribbon, .slogan-bg, .footer, .interlude { padding-left: 24px; padding-right: 24px; }
+  .or-divider { padding: 0 24px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .interlude { padding-top: 72px; padding-bottom: 72px; }
+}
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 58px; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
+}
+
+/* ══════ SCROLL REVEAL ══════ */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav">
-  <a class="nav-brand" href="#">
-    <img class="nav-logo" src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
-    <div>
-      <div class="nav-brand-name">Liste IMPACT</div>
-      <div class="nav-brand-sub">Élections ONMB 2026</div>
+<!-- ══ NAV ══ -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <span class="nav-logo-i">I</span>
+    </div>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">Liste IMPACT</div>
+      <div class="nav-logo-sub">Élections ONMB 2026</div>
     </div>
   </a>
   <div class="nav-links">
@@ -561,213 +643,227 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
     <a href="#liste">La liste</a>
     <a href="#badge">Badge</a>
     <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank">Électeurs</a>
-    <a href="#badge" class="nav-vote">Voter IMPACT</a>
+    <a href="#badge" class="nav-cta">Voter IMPACT</a>
   </div>
-  <button class="nav-burger" id="burger" aria-label="Menu" onclick="toggleMenu()">
-    <span class="burger-bar"></span>
-    <span class="burger-bar"></span>
-    <span class="burger-bar"></span>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+    <span class="bb"></span><span class="bb"></span><span class="bb"></span>
   </button>
 </nav>
 
-<!-- MOBILE DRAWER -->
+<!-- ══ DRAWER ══ -->
 <div class="nav-drawer" id="drawer">
-  <a class="drawer-link" href="#vision" onclick="closeMenu()">
-    Programme <span class="drawer-link-arrow">→</span>
-  </a>
-  <a class="drawer-link" href="#liste" onclick="closeMenu()">
-    La liste <span class="drawer-link-arrow">→</span>
-  </a>
-  <a class="drawer-link" href="#badge" onclick="closeMenu()">
-    Badge de soutien <span class="drawer-link-arrow">→</span>
-  </a>
-  <a class="drawer-link" href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank" onclick="closeMenu()">
-    Liste des électeurs <span class="drawer-link-arrow">→</span>
-  </a>
-  <a class="drawer-cta" href="#badge" onclick="closeMenu()">Voter IMPACT</a>
-  <div class="drawer-footer">
-    <img src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" style="height:24px;opacity:.4" onerror="this.style.display='none'">
-    <a href="https://ordremedecinsbenin.bj" target="_blank">ordremedecinsbenin.bj</a>
+  <a class="drawer-a" href="#vision" onclick="closeMenu()">Programme <span>→</span></a>
+  <a class="drawer-a" href="#liste" onclick="closeMenu()">La liste <span>→</span></a>
+  <a class="drawer-a" href="#badge" onclick="closeMenu()">Badge de soutien <span>→</span></a>
+  <a class="drawer-a" href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank" onclick="closeMenu()">Liste des électeurs <span>→</span></a>
+  <div class="drawer-cta-wrap">
+    <a class="drawer-cta" href="#badge" onclick="closeMenu()">Voter IMPACT</a>
   </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg-circle1"></div>
-  <div class="hero-bg-circle2"></div>
-  <div class="hero-bg-lines"></div>
-  <div class="hero-content">
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-deco-text">IMPACT</div>
+
+  <div class="hero-body">
     <div>
       <div class="hero-eyebrow">
-        <span class="eyebrow-dot"></span>
-        <span class="eyebrow-text">Élections ONMB 2026 · Conseil de l'Atlantique</span>
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Élections ONMB 2026 · Conseil de l'Atlantique</span>
       </div>
-      <div class="hero-title">IMPACT</div>
-      <div class="hero-title-italic">Un Ordre à votre service.</div>
+      <h1 class="hero-h1">IMPACT</h1>
+      <p class="hero-h1-sub">Un Ordre à votre service.</p>
       <p class="hero-desc">
         Parce que les médecins du Bénin méritent un Ordre qui protège vraiment, qui accompagne concrètement, et qui inspire une confiance durable — aux médecins comme aux patients.
       </p>
       <div class="hero-btns">
-        <a href="#badge" class="btn-hero-primary">Créer mon badge de soutien</a>
-        <a href="#vision" class="btn-hero-ghost">Découvrir le programme</a>
+        <a href="#badge" class="btn-primary">Créer mon badge de soutien</a>
+        <a href="#vision" class="btn-ghost">Découvrir le programme</a>
       </div>
     </div>
-    <div class="hero-card">
-      <span class="hc-quote-mark">"</span>
-      <div class="hc-quote">Protéger sans écraser, encadrer sans décourager, élever sans exclure.</div>
-      <div class="hc-divider"></div>
-      <div class="hc-stats">
+    <div class="hero-panel">
+      <span class="panel-quote-mark">"</span>
+      <p class="panel-quote">Protéger sans écraser, encadrer sans décourager, élever sans exclure.</p>
+      <div class="panel-sep"></div>
+      <div class="panel-stats">
         <div>
-          <div class="hc-stat-num">4 000<span>+</span></div>
-          <div class="hc-stat-lbl">Médecins au Bénin</div>
+          <div class="pstat-n">4 000<span>+</span></div>
+          <div class="pstat-l">Médecins au Bénin</div>
         </div>
         <div>
-          <div class="hc-stat-num">7</div>
-          <div class="hc-stat-lbl">Candidats engagés</div>
+          <div class="pstat-n">7</div>
+          <div class="pstat-l">Candidats engagés</div>
         </div>
         <div>
-          <div class="hc-stat-num">5</div>
-          <div class="hc-stat-lbl">Engagements clairs</div>
+          <div class="pstat-n">6</div>
+          <div class="pstat-l">Engagements clairs</div>
         </div>
         <div>
-          <div class="hc-stat-num">1</div>
-          <div class="hc-stat-lbl">Vision commune</div>
+          <div class="pstat-n">1</div>
+          <div class="pstat-l">Vision commune</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <div class="scroll-text">Découvrir</div>
-    <div class="scroll-line"></div>
-  </div>
-</div>
 
-<!-- ONMB BAND -->
-<div class="onmb-band">
-  <div class="onmb-band-inner">
-    <img class="onmb-logo" src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
-    <div class="onmb-info">
-      <div class="onmb-name">Ordre National des Médecins du Bénin (ONMB)</div>
-      <div class="onmb-desc">Institution de droit privé chargée d'une mission de service public · Gbedjewin, Akpakpa, Cotonou · +(229) 94 96 81 81</div>
-      <div class="onmb-tags">
-        <span class="tag tag-green">Vote en ligne sécurisé</span>
-        <span class="tag tag-green">Vote secret</span>
-        <span class="tag tag-outline">4 000+ membres</span>
-        <span class="tag tag-outline">Fondé en 1973</span>
-      </div>
-    </div>
-    <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank" class="onmb-link">
-      Liste des électeurs →
-    </a>
-  </div>
-</div>
-
-<!-- VISION -->
-<section class="section" id="vision">
-  <div class="vision-wrap">
-    <div class="vision-left">
-      <div class="sec-tag">Notre programme</div>
-      <h2 class="sec-h">Cinq engagements<br>pour transformer<br>l'Ordre.</h2>
-      <p class="sec-p">Un Ordre fort est celui qui remplit ses missions fondamentales avec clarté, courage et humanité.</p>
-      <a href="#badge" class="btn-hero-primary" style="display:inline-block;margin-top:8px;">Je soutiens IMPACT</a>
-    </div>
-    <div class="vision-items">
-      <div class="vision-item">
-        <div class="vi-num">01</div>
-        <div class="vi-title">Protection judiciaire et professionnelle</div>
-        <div class="vi-desc">Un accompagnement réel et concret du médecin face aux risques juridiques, aux plaintes et aux mises en cause professionnelles. L'Ordre doit être votre bouclier, pas un spectateur.</div>
-      </div>
-      <div class="vision-item">
-        <div class="vi-num">02</div>
-        <div class="vi-title">Sécurité et qualité des soins</div>
-        <div class="vi-desc">Veiller au strict respect des normes déontologiques et garantir la protection des patients dans chaque structure de soins au Bénin.</div>
-      </div>
-      <div class="vision-item">
-        <div class="vi-num">03</div>
-        <div class="vi-title">Accompagnement des jeunes médecins</div>
-        <div class="vi-desc">Dialoguer avec les gouvernants de façon objective et audacieuse pour freiner la fuite des cerveaux et ouvrir de vraies perspectives aux jeunes praticiens.</div>
-      </div>
-      <div class="vision-item">
-        <div class="vi-num">04</div>
-        <div class="vi-title">Dignité et conditions d'exercice</div>
-        <div class="vi-desc">Défendre la valeur de notre métier, notre dignité et améliorer concrètement les conditions dans lesquelles chaque médecin exerce au quotidien.</div>
-      </div>
-      <div class="vision-item">
-        <div class="vi-num">05</div>
-        <div class="vi-title">Confiance médecin–patient</div>
-        <div class="vi-desc">Renforcer le lien essentiel entre soignant et soigné — pierre angulaire de tout système de santé digne, humain et performant.</div>
-      </div>
-    </div>
+  <div class="hero-footer">
+    <div class="hf-dot"></div>
+    <span class="hf-text">Défiler pour découvrir</span>
+    <div class="hf-dot"></div>
   </div>
 </section>
 
-<!-- TEAM -->
-<div class="team-section" id="liste">
-  <div class="team-inner">
-    <div class="sec-tag" style="color:var(--g4)">
-      <span style="display:block;width:24px;height:2px;background:var(--g4)"></span>
-      Composition officielle
+<!-- ══ RIBBON ══ -->
+<div class="ribbon">
+  <div class="ribbon-inner">
+    <img class="ribbon-logo" src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
+    <div>
+      <div class="ribbon-name">Ordre National des Médecins du Bénin (ONMB)</div>
+      <div class="ribbon-sub">Institution de droit privé chargée d'une mission de service public · Gbedjewin, Akpakpa, Cotonou · +(229) 94 96 81 81</div>
     </div>
-    <h2 class="sec-h" style="color:#fff">Une équipe engagée,<br>complémentaire, humaine.</h2>
-    <p class="sec-p" style="color:rgba(255,255,255,0.35);margin-bottom:48px;">Liste conforme au nouveau décret régissant les élections ordinales par vote en ligne sécurisé.</p>
+    <div class="ribbon-tags">
+      <span class="rtag rtag-gold">Vote en ligne sécurisé</span>
+      <span class="rtag rtag-gold">Vote secret</span>
+      <span class="rtag rtag-outline">4 000+ membres</span>
+      <span class="rtag rtag-outline">Fondé en 1973</span>
+    </div>
+    <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank" class="ribbon-link">Liste des électeurs →</a>
+  </div>
+</div>
+
+<!-- ══ VISION ══ -->
+<div class="vision-bg" id="vision">
+  <div class="sec">
+    <div class="vision-layout">
+      <div class="vision-sticky">
+        <div class="sec-tag">Notre programme</div>
+        <h2 class="sec-h">Six engagements<br>pour <em>transformer</em><br>l'Ordre.</h2>
+        <p class="sec-p">Un Ordre fort est celui qui remplit ses missions fondamentales avec clarté, courage et humanité. Voici les six piliers de notre action.</p>
+        <a href="#badge" class="btn-primary" style="display:inline-flex;">Je soutiens IMPACT</a>
+      </div>
+      <div class="vision-items">
+        <div class="vi reveal">
+          <div class="vi-num">01</div>
+          <div>
+            <div class="vi-title">Protection judiciaire et professionnelle</div>
+            <div class="vi-desc">Un accompagnement réel et concret du médecin face aux risques juridiques, aux plaintes et aux mises en cause professionnelles. L'Ordre doit être votre bouclier, pas un spectateur.</div>
+          </div>
+        </div>
+        <div class="vi reveal">
+          <div class="vi-num">02</div>
+          <div>
+            <div class="vi-title">Sécurité et qualité des soins</div>
+            <div class="vi-desc">Veiller au strict respect des normes déontologiques et garantir la protection des patients dans chaque structure de soins au Bénin.</div>
+          </div>
+        </div>
+        <div class="vi reveal">
+          <div class="vi-num">03</div>
+          <div>
+            <div class="vi-title">Accompagnement des jeunes médecins</div>
+            <div class="vi-desc">Dialoguer avec les gouvernants de façon objective et audacieuse pour freiner la fuite des cerveaux et ouvrir de vraies perspectives aux jeunes praticiens.</div>
+          </div>
+        </div>
+        <div class="vi reveal">
+          <div class="vi-num">04</div>
+          <div>
+            <div class="vi-title">Dignité et conditions d'exercice</div>
+            <div class="vi-desc">Défendre la valeur de notre métier, notre dignité et améliorer concrètement les conditions dans lesquelles chaque médecin exerce au quotidien.</div>
+          </div>
+        </div>
+        <div class="vi reveal">
+          <div class="vi-num">05</div>
+          <div>
+            <div class="vi-title">Confiance médecin–patient</div>
+            <div class="vi-desc">Renforcer le lien essentiel entre soignant et soigné — pierre angulaire de tout système de santé digne, humain et performant.</div>
+          </div>
+        </div>
+        <div class="vi reveal">
+          <div class="vi-num">06</div>
+          <div>
+            <div class="vi-title">Formation et renforcement des capacités</div>
+            <div class="vi-desc">Former et renforcer les capacités des médecins du département à travers des EPU, afin de soutenir une pratique médicale actualisée, exigeante et adaptée aux réalités du terrain.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INTERLUDE QUOTE ══ -->
+<div class="interlude">
+  <div class="interlude-pattern"></div>
+  <div class="interlude-inner">
+    <span class="interlude-qm">"</span>
+    <p class="interlude-q">Voter IMPACT, c'est choisir <strong>un Ordre qui vous ressemble</strong> — humain, courageux et à la hauteur de votre engagement.</p>
+    <span class="interlude-sub">— Liste IMPACT, Élections ONMB 2026</span>
+  </div>
+</div>
+
+<!-- ══ TEAM ══ -->
+<div class="team-bg" id="liste">
+  <div class="sec">
+    <div class="sec-tag" style="color:var(--or)">Composition officielle</div>
+    <h2 class="sec-h" style="color:var(--blanc)">Une équipe <em>engagée,</em><br>complémentaire, humaine.</h2>
+    <p class="sec-p">Liste conforme au nouveau décret régissant les élections ordinales par vote en ligne sécurisé.</p>
     <div class="team-grid">
-      <div class="member member-president">
-        <div class="av av-pres">TC</div>
+      <div class="m-card m-pres reveal">
+        <div class="av av-gold">TC</div>
         <div class="m-name-big">Dr TOHOUENOU Christian</div>
         <div class="m-dept">Conseil de l'Atlantique</div>
-        <span class="badge b-pres">Président</span>
+        <span class="badge b-or">Président de liste</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">AB</div>
         <div class="m-name">Dr ADJADI BAKARI Ayodele</div>
-        <span class="badge b-vp">Vice-présidente</span>
+        <span class="badge b-bleu">Vice-présidente</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">KD</div>
         <div class="m-name">Dr KETEHOUNDJE Désiré</div>
         <span class="badge b-rap">Rapporteur</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">GR</div>
         <div class="m-name">Dr GAYITO René</div>
         <span class="badge b-mem">Membre</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">BT</div>
         <div class="m-name">Dr BEHETON Todoegnon</div>
         <span class="badge b-mem">Membre</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">AG</div>
         <div class="m-name">Dr AKPO Gisèle</div>
         <span class="badge b-sup">Suppléante</span>
       </div>
-      <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">LI</div>
         <div class="m-name">Dr LOKOSSI Iréné</div>
         <span class="badge b-sup">Suppléant</span>
       </div>
-
-        <div class="member">
+      <div class="m-card reveal">
         <div class="av av-std">AC</div>
         <div class="m-name">Dr Adigbonon Claudette</div>
-        <span class="badge b-sup">Suppléant</span>
+        <span class="badge b-sup">Suppléante</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- BADGE GENERATOR -->
-<div class="gen-section" id="badge">
-  <div class="gen-inner">
+<!-- ══ BADGE GENERATOR ══ -->
+<div class="gen-bg" id="badge">
+  <div class="sec">
     <div class="sec-tag">Outil de campagne</div>
-    <h2 class="sec-h">Générez votre<br>badge de soutien.</h2>
+    <h2 class="sec-h">Générez votre<br><em>badge de soutien.</em></h2>
     <p class="sec-p">Personnalisez votre image en quelques secondes et partagez-la sur WhatsApp, Facebook et tous vos réseaux.</p>
     <div class="gen-layout">
-      <div class="gen-preview">
-        <canvas id="bc" width="300" height="300"></canvas>
-        <div class="preview-hint">Aperçu mis à jour en temps réel</div>
+      <div class="gen-canvas-wrap">
+        <canvas id="bc" width="320" height="320"></canvas>
+        <div class="canvas-hint">Aperçu en temps réel</div>
       </div>
       <div class="gen-form">
         <div class="f-group">
@@ -781,226 +877,243 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:va
         <div class="f-group">
           <label class="f-label">Votre photo</label>
           <label for="fi" class="upload-zone">
-            <div class="upload-icon">📷</div>
-            <div class="upload-title">Cliquez pour ajouter votre photo</div>
-            <div class="upload-sub">JPG ou PNG — format portrait recommandé</div>
-            <div class="upload-selected" id="fname"></div>
+            <div class="upload-ico">📷</div>
+            <div class="upload-t">Ajouter votre photo</div>
+            <div class="upload-s">JPG ou PNG — portrait recommandé</div>
+            <div class="upload-sel" id="fname"></div>
           </label>
           <input type="file" id="fi" accept="image/*" onchange="loadPic(event)">
         </div>
-        <button class="btn-download" onclick="dlBadge()">Télécharger mon badge PNG</button>
-        <div class="dl-confirm" id="dlc">Badge téléchargé avec succès !</div>
+        <button class="btn-dl" onclick="dlBadge()">Télécharger mon badge PNG</button>
+        <div class="dl-ok" id="dlc">Badge téléchargé avec succès !</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLOGAN -->
-<div class="slogan-section">
+<!-- ══ SLOGAN ══ -->
+<div class="slogan-bg">
   <div class="slogan-inner">
-    <span class="slogan-word" data-delay="0">Ne subissons plus.</span>
-    <span class="slogan-word" data-delay="100">Mobilisons-nous.</span>
-    <span class="slogan-word" data-delay="200">Engageons-nous.</span>
-    <span class="slogan-word accent" data-delay="350">Ensemble, faisons IMPACT.</span>
+    <span class="slogan-line" data-d="0">Ne subissons plus.</span>
+    <span class="slogan-line" data-d="120">Mobilisons-nous.</span>
+    <span class="slogan-line" data-d="240">Engageons-nous.</span>
+    <span class="slogan-line accent" data-d="400">Ensemble, faisons IMPACT.</span>
     <div class="slogan-cta">
-      <p class="slogan-sub">Voter IMPACT, c'est choisir un Ordre qui défend le médecin tout en protégeant le patient. C'est bâtir une institution juste, humaine et crédible.</p>
+      <p class="slogan-cta-p">Voter IMPACT, c'est choisir un Ordre qui défend le médecin tout en protégeant le patient. C'est bâtir une institution juste, humaine et crédible.</p>
       <a href="#badge" class="btn-slogan">Créer mon badge maintenant</a>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ══ FOOTER ══ -->
 <footer class="footer">
   <div class="footer-inner">
-    <img class="footer-logo" src="https://ordremedecinsbenin.bj/assets/img/logo_onmb.png" alt="ONMB" onerror="this.style.display='none'">
+    <div class="footer-brand">
+      <div class="footer-logo-mark"><span class="footer-logo-i">I</span></div>
+      <span class="footer-brand-name">Liste IMPACT · ONMB 2026</span>
+    </div>
     <div class="footer-links">
       <a href="https://ordremedecinsbenin.bj" target="_blank">ordremedecinsbenin.bj</a>
-      <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank">Liste des électeurs</a>
+      <a href="https://ordremedecinsbenin.bj/publications/liste-de-electeurs" target="_blank">Électeurs</a>
       <a href="https://ordremedecinsbenin.bj/contact" target="_blank">Contact ONMB</a>
     </div>
-    <div class="footer-copy">Élections ONMB 2026 · Liste IMPACT</div>
+    <span class="footer-copy">© 2026 Élections ONMB · Liste IMPACT</span>
   </div>
 </footer>
 
 <script>
-/* ── BADGE CANVAS ── */
-const cv=document.getElementById('bc');
-const cx=cv.getContext('2d');
-let photo=null,drawn=false;
+/* ══ CANVAS BADGE ══ */
+const cv = document.getElementById('bc');
+const cx = cv.getContext('2d');
+let photo = null, drawn = false;
+const W = 320, H = 320;
 
-function loadPic(e){
-  const f=e.target.files[0];if(!f)return;
-  document.getElementById('fname').textContent='Photo : '+f.name;
-  const r=new FileReader();
-  r.onload=ev=>{const img=new Image();img.onload=()=>{photo=img;draw();};img.src=ev.target.result;};
+function loadPic(e) {
+  const f = e.target.files[0]; if (!f) return;
+  document.getElementById('fname').textContent = '📎 ' + f.name;
+  const r = new FileReader();
+  r.onload = ev => { const img = new Image(); img.onload = () => { photo = img; draw(); }; img.src = ev.target.result; };
   r.readAsDataURL(f);
 }
 
-function clip(ctx,x,y,w,h,r){
+function clip(ctx, x, y, w, h, r) {
   ctx.beginPath();
-  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y);
   ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-  ctx.lineTo(x+w,y+h-r);
-  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-  ctx.lineTo(x+r,y+h);
-  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-  ctx.lineTo(x,y+r);
-  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
   ctx.closePath();
 }
 
-function wt(ctx,text,x,y,mw,lh){
-  const words=text.split(' ');let line='';
-  const lines=[];
-  words.forEach((w,i)=>{
-    const t=line+w+' ';
-    if(ctx.measureText(t).width>mw&&i>0){lines.push(line.trim());line=w+' ';}
-    else line=t;
+function wrapText(ctx, text, x, y, mw, lh) {
+  const words = text.split(' '); let line = ''; const lines = [];
+  words.forEach((w, i) => {
+    const t = line + w + ' ';
+    if (ctx.measureText(t).width > mw && i > 0) { lines.push(line.trim()); line = w + ' '; } else line = t;
   });
   lines.push(line.trim());
-  const startY=y-(lines.length-1)*lh/2;
-  lines.forEach((l,i)=>ctx.fillText(l,x,startY+i*lh));
+  const sy = y - (lines.length - 1) * lh / 2;
+  lines.forEach((l, i) => ctx.fillText(l, x, sy + i * lh));
 }
 
-function draw(){
-  const W=300,H=300;
-  cx.clearRect(0,0,W,H);
+function draw() {
+  cx.clearRect(0, 0, W, H);
   cx.save();
-  clip(cx,0,0,W,H,20);cx.clip();
+  clip(cx, 0, 0, W, H, 20); cx.clip();
 
-  /* bg */
-  cx.fillStyle='#021A10';cx.fillRect(0,0,W,H);
-  /* circle accent */
-  const g=cx.createRadialGradient(W,0,0,W,0,W*0.9);
-  g.addColorStop(0,'rgba(29,158,117,0.25)');g.addColorStop(1,'transparent');
-  cx.fillStyle=g;cx.fillRect(0,0,W,H);
-  /* grid lines */
-  cx.strokeStyle='rgba(255,255,255,0.025)';cx.lineWidth=1;
-  for(let i=0;i<W;i+=40){cx.beginPath();cx.moveTo(i,0);cx.lineTo(i,H);cx.stroke();}
-  for(let i=0;i<H;i+=40){cx.beginPath();cx.moveTo(0,i);cx.lineTo(W,i);cx.stroke();}
+  /* Background bleu ciel */
+  cx.fillStyle = '#DFF3FF'; cx.fillRect(0, 0, W, H);
 
-  /* photo circle */
-  const ps=104,px=(W-ps)/2,py=20;
+  /* Dégradé subtil haut vers bas */
+  const bgG = cx.createLinearGradient(0, 0, 0, H);
+  bgG.addColorStop(0, '#EAF8FF');
+  bgG.addColorStop(1, '#B8DDEF');
+  cx.fillStyle = bgG; cx.fillRect(0, 0, W, H);
+
+  /* Pattern géométrique discret */
+  cx.strokeStyle = 'rgba(0,100,160,0.06)'; cx.lineWidth = 1;
+  for (let i = -H; i < W + H; i += 28) {
+    cx.beginPath(); cx.moveTo(i, 0); cx.lineTo(i + H, H); cx.stroke();
+    cx.beginPath(); cx.moveTo(i, 0); cx.lineTo(i - H, H); cx.stroke();
+  }
+
+  /* Lueur dorée coin haut-droit */
+  const glow = cx.createRadialGradient(W, 0, 0, W, 0, W * 0.7);
+  glow.addColorStop(0, 'rgba(196,151,42,0.12)'); glow.addColorStop(1, 'transparent');
+  cx.fillStyle = glow; cx.fillRect(0, 0, W, H);
+
+  /* Bordure intérieure fine bleue */
+  cx.strokeStyle = 'rgba(0,130,200,0.2)'; cx.lineWidth = 1.5;
+  clip(cx, 8, 8, W-16, H-16, 14); cx.stroke();
+
+  /* Photo circle */
+  const ps = 108, px = (W - ps) / 2, py = 22;
   cx.save();
-  cx.beginPath();cx.arc(px+ps/2,py+ps/2,ps/2,0,Math.PI*2);cx.clip();
-  if(photo){
-    const s=Math.min(photo.width,photo.height);
-    cx.drawImage(photo,(photo.width-s)/2,(photo.height-s)/2,s,s,px,py,ps,ps);
+  cx.beginPath(); cx.arc(px + ps/2, py + ps/2, ps/2, 0, Math.PI * 2); cx.clip();
+  if (photo) {
+    const s = Math.min(photo.width, photo.height);
+    cx.drawImage(photo, (photo.width-s)/2, (photo.height-s)/2, s, s, px, py, ps, ps);
   } else {
-    cx.fillStyle='rgba(255,255,255,0.07)';cx.fillRect(px,py,ps,ps);
-    cx.fillStyle='rgba(255,255,255,0.3)';
-    cx.font='11px Plus Jakarta Sans,sans-serif';cx.textAlign='center';
-    cx.fillText('Votre photo',W/2,py+ps/2-5);
-    cx.fillText('ici',W/2,py+ps/2+12);
+    cx.fillStyle = 'rgba(0,120,190,0.08)'; cx.fillRect(px, py, ps, ps);
+    cx.fillStyle = 'rgba(0,100,160,0.35)';
+    cx.font = '400 11px Outfit, sans-serif'; cx.textAlign = 'center';
+    cx.fillText('Votre photo ici', W/2, py + ps/2 + 4);
   }
   cx.restore();
-  /* ring */
-  cx.strokeStyle='rgba(29,158,117,0.7)';cx.lineWidth=2.5;
-  cx.beginPath();cx.arc(W/2,py+ps/2,ps/2+4,0,Math.PI*2);cx.stroke();
-  cx.strokeStyle='rgba(93,202,165,0.2)';cx.lineWidth=1;
-  cx.beginPath();cx.arc(W/2,py+ps/2,ps/2+12,0,Math.PI*2);cx.stroke();
 
-  /* name */
-  const name=document.getElementById('ni').value.trim()||'Dr Votre Nom';
-  const spec=document.getElementById('si').value.trim();
-  const nameY=py+ps+24;
-  cx.fillStyle='#fff';
-  cx.font='600 14px Plus Jakarta Sans,sans-serif';cx.textAlign='center';
-  wt(cx,name,W/2,nameY,250,19);
-  if(spec){
-    cx.fillStyle='rgba(93,202,165,0.7)';
-    cx.font='400 11px Plus Jakarta Sans,sans-serif';
-    cx.fillText(spec,W/2,nameY+32);
+  /* Anneau doré */
+  cx.strokeStyle = 'rgba(196,151,42,0.85)'; cx.lineWidth = 2;
+  cx.beginPath(); cx.arc(W/2, py + ps/2, ps/2 + 5, 0, Math.PI * 2); cx.stroke();
+  cx.strokeStyle = 'rgba(196,151,42,0.2)'; cx.lineWidth = 1;
+  cx.beginPath(); cx.arc(W/2, py + ps/2, ps/2 + 14, 0, Math.PI * 2); cx.stroke();
+
+  /* Nom */
+  const name = document.getElementById('ni').value.trim() || 'Dr Votre Nom';
+  const spec = document.getElementById('si').value.trim();
+  const nameY = py + ps + 28;
+  cx.fillStyle = '#0A2A40';
+  cx.font = '600 15px Outfit, sans-serif'; cx.textAlign = 'center';
+  wrapText(cx, name, W/2, nameY, 260, 20);
+  if (spec) {
+    cx.fillStyle = 'rgba(0,90,150,0.55)';
+    cx.font = '300 11px Outfit, sans-serif';
+    cx.fillText(spec, W/2, nameY + 34);
   }
 
-  /* divider */
-  const dY=H-72;
-  cx.fillStyle='rgba(255,255,255,0.07)';cx.fillRect(24,dY,W-48,1);
+  /* Séparateur */
+  const dY = H - 70;
+  cx.strokeStyle = 'rgba(196,151,42,0.35)'; cx.lineWidth = 1;
+  cx.beginPath(); cx.moveTo(40, dY); cx.lineTo(W-40, dY); cx.stroke();
+  /* diamant doré */
+  cx.fillStyle = 'rgba(196,151,42,0.6)';
+  cx.save(); cx.translate(W/2, dY); cx.rotate(Math.PI/4);
+  cx.fillRect(-4, -4, 8, 8); cx.restore();
 
-  /* vote text */
-  cx.fillStyle='rgba(255,255,255,0.4)';
-  cx.font='500 10px Plus Jakarta Sans,sans-serif';
-  cx.letterSpacing='2px';cx.fillText('JE VOTE LISTE',W/2,dY+16);
+  /* "JE VOTE" */
+  cx.fillStyle = 'rgba(0,80,130,0.4)';
+  cx.font = '500 9px Outfit, sans-serif'; cx.textAlign = 'center';
+  cx.fillText('JE VOTE', W/2, dY + 16);
 
-  cx.fillStyle='#fff';
-  cx.font='bold 32px Playfair Display,Georgia,serif';
-  cx.letterSpacing='4px';cx.fillText('IMPACT',W/2,dY+50);
+  /* IMPACT */
+  cx.fillStyle = '#0A2A40';
+  cx.font = '700 36px Cormorant Garamond, Georgia, serif';
+  cx.fillText('IMPACT', W/2, dY + 50);
 
-  cx.fillStyle='rgba(255,255,255,0.2)';
-  cx.font='300 8px Plus Jakarta Sans,sans-serif';
-  cx.letterSpacing='0px';cx.fillText('Élections ordinales ONMB 2026',W/2,H-10);
+  /* Trait doré sous IMPACT */
+  cx.fillStyle = 'rgba(196,151,42,0.6)';
+  cx.fillRect(W/2 - 36, dY + 55, 72, 1.5);
 
-  cx.restore();drawn=true;
+  cx.fillStyle = 'rgba(0,80,130,0.25)';
+  cx.font = '300 8px Outfit, sans-serif';
+  cx.fillText('Élections ordinales ONMB 2026', W/2, H - 10);
+
+  cx.restore();
+  drawn = true;
 }
 
-function dlBadge(){
-  if(!drawn)draw();
-  try{
-    const a=document.createElement('a');
-    a.download='badge-IMPACT-ONMB-2026.png';
-    a.href=cv.toDataURL('image/png');
-    document.body.appendChild(a);a.click();document.body.removeChild(a);
-    const c=document.getElementById('dlc');
+function dlBadge() {
+  if (!drawn) draw();
+  try {
+    const a = document.createElement('a');
+    a.download = 'badge-IMPACT-ONMB-2026.png';
+    a.href = cv.toDataURL('image/png');
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    const c = document.getElementById('dlc');
     c.classList.add('show');
-    setTimeout(()=>c.classList.remove('show'),3500);
-  } catch(e){alert('Erreur : '+e.message);}
+    setTimeout(() => c.classList.remove('show'), 3500);
+  } catch(e) { alert('Erreur : ' + e.message); }
 }
 
 draw();
 
-/* ── MOBILE MENU ── */
-function toggleMenu(){
-  const b=document.getElementById('burger');
-  const d=document.getElementById('drawer');
-  const isOpen=b.classList.toggle('open');
-  d.classList.toggle('open',isOpen);
-  document.body.style.overflow=isOpen?'hidden':'';
+/* ══ NAV scroll ══ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ══ MOBILE MENU ══ */
+function toggleMenu() {
+  const b = document.getElementById('burger');
+  const d = document.getElementById('drawer');
+  const open = b.classList.toggle('open');
+  d.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
 }
-function closeMenu(){
+function closeMenu() {
   document.getElementById('burger').classList.remove('open');
   document.getElementById('drawer').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-/* ── SCROLL ANIMATIONS ── */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.style.opacity='1';
-      e.target.style.transform='none';
+/* ══ INTERSECTION OBSERVER ══ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = (Array.from(e.target.parentElement.children).indexOf(e.target) * 0.07) + 's';
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
     }
   });
-},{threshold:0.12});
+}, { threshold: 0.1 });
 
-document.querySelectorAll('.vision-item,.member').forEach(el=>{
-  el.style.opacity='0';
-  el.style.transform='translateY(20px)';
-  el.style.transition='opacity .55s ease, transform .55s ease';
-  io.observe(el);
-});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* stagger */
-let delay=0;
-document.querySelectorAll('.vision-item,.member').forEach((el,i)=>{
-  el.style.transitionDelay=(i*0.06)+'s';
-});
-
-/* slogan words */
-const sio=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const words=e.target.querySelectorAll('.slogan-word');
-      words.forEach((w,i)=>{
-        const d=parseInt(w.dataset.delay)||i*120;
-        setTimeout(()=>w.classList.add('visible'),d);
+/* ══ SLOGAN ANIMATION ══ */
+const sio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.slogan-line').forEach(w => {
+        const d = parseInt(w.dataset.d) || 0;
+        setTimeout(() => w.classList.add('visible'), d);
       });
       sio.unobserve(e.target);
     }
   });
-},{threshold:0.3});
-const ss=document.querySelector('.slogan-inner');
-if(ss)sio.observe(ss);
+}, { threshold: 0.3 });
+const si = document.querySelector('.slogan-inner');
+if (si) sio.observe(si);
 </script>
 </body>
 </html>
