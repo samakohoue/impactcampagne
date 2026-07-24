@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#050b12" />
   <meta name="description"
-    content="Billetterie officielle du Festival ADJA BLEU — vivez trois jours de culture, de musique et d'émotions à Grand-Popo." />
+    content="Billetterie officielle du Festival ADJA BLEU — vivez trois jours de culture, de musique et d'émotions à Mono." />
   <title>ADJA BLEU — L’expérience commence ici</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1572,6 +1572,416 @@
         transform: none
       }
     }
+
+
+    /* Premium cinematic refinement */
+    ::selection {
+      background: rgba(86, 182, 239, .35);
+      color: #fff
+    }
+
+    body {
+      background: #03080e
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")
+    }
+
+    .site-header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(3, 8, 14, .82), transparent);
+      opacity: 1;
+      transition: .35s;
+      pointer-events: none
+    }
+
+    .site-header.scrolled::before {
+      opacity: 0
+    }
+
+    .nav {
+      position: relative
+    }
+
+    .brand img {
+      transition: transform .45s cubic-bezier(.2, .8, .2, 1), filter .45s
+    }
+
+    .brand:hover img {
+      transform: rotate(-3deg) scale(1.08);
+      filter: drop-shadow(0 13px 27px rgba(86, 182, 239, .22))
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 8px 0
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      transition: right .3s
+    }
+
+    .nav-links a:hover::after {
+      right: 0
+    }
+
+    .btn {
+      letter-spacing: -.015em
+    }
+
+    .btn-primary {
+      border-color: rgba(255, 255, 255, .22);
+      box-shadow: 0 18px 45px rgba(37, 136, 200, .30), inset 0 1px rgba(255, 255, 255, .45)
+    }
+
+    .btn-gold {
+      border-color: rgba(255, 255, 255, .26);
+      box-shadow: 0 18px 45px rgba(224, 182, 65, .25), inset 0 1px rgba(255, 255, 255, .5)
+    }
+
+    .hero {
+      padding-bottom: 94px
+    }
+
+    .hero-backdrop {
+      background: linear-gradient(90deg, rgba(3, 8, 14, .99) 0%, rgba(3, 8, 14, .88) 38%, rgba(3, 8, 14, .28) 68%, rgba(3, 8, 14, .74) 100%), linear-gradient(0deg, #03080e 0%, transparent 36%), linear-gradient(145deg, #0b2033 0%, #176a98 44%, #d5aa3e 100%)
+    }
+
+    .hero-backdrop::before {
+      right: -4%;
+      top: -16%;
+      filter: saturate(112%);
+      box-shadow: 0 0 150px rgba(86, 182, 239, .12)
+    }
+
+    .hero-content {
+      max-width: 850px
+    }
+
+    .hero-logo {
+      width: 205px;
+      margin-bottom: 28px
+    }
+
+    h1 {
+      font-size: clamp(4rem, 8.6vw, 8.8rem);
+      text-shadow: 0 20px 80px rgba(0, 0, 0, .35)
+    }
+
+    .hero-title-accent {
+      background: linear-gradient(100deg, #fff3b1 0%, #e7bf4d 42%, #83d4ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .hero-copy {
+      font-size: clamp(1.03rem, 1.5vw, 1.22rem);
+      max-width: 720px;
+      color: #e2ebf1
+    }
+
+    .hero-actions .btn {
+      min-height: 58px;
+      padding-inline: 28px;
+      font-size: .98rem
+    }
+
+    .hero-premium-card {
+      position: absolute;
+      right: 6.2%;
+      bottom: 18%;
+      z-index: 4;
+      width: min(29vw, 390px);
+      aspect-ratio: 1.58;
+      padding: 24px;
+      border-radius: 28px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(145deg, rgba(16, 39, 57, .82), rgba(7, 18, 29, .93));
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: 0 45px 120px rgba(0, 0, 0, .52), inset 0 1px rgba(255, 255, 255, .16);
+      backdrop-filter: blur(24px);
+      transform: rotate(4deg);
+      animation: cardFloat 7s ease-in-out infinite
+    }
+
+    .hero-premium-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 15%, rgba(255, 255, 255, .10) 38%, transparent 56%);
+      transform: translateX(-100%);
+      animation: cardShine 5.5s 1.4s infinite
+    }
+
+    .hero-premium-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      right: -80px;
+      bottom: -100px;
+      border: 34px solid rgba(86, 182, 239, .17);
+      box-shadow: 0 0 0 24px rgba(224, 182, 65, .07)
+    }
+
+    .premium-card-glow {
+      position: absolute;
+      inset: auto auto -35% -16%;
+      width: 80%;
+      height: 90%;
+      background: radial-gradient(circle, rgba(86, 182, 239, .32), transparent 65%);
+      filter: blur(18px)
+    }
+
+    .premium-card-head,
+    .premium-card-foot {
+      display: flex;
+      justify-content: space-between;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      font-weight: 800;
+      color: #c3d5e0;
+      position: relative;
+      z-index: 2
+    }
+
+    .premium-card-logo {
+      position: absolute;
+      right: 25px;
+      top: 54px;
+      width: 108px;
+      opacity: .96
+    }
+
+    .premium-card-copy {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 8px
+    }
+
+    .premium-card-copy small {
+      font-size: .62rem;
+      letter-spacing: .17em;
+      color: #94b6ca;
+      font-weight: 800
+    }
+
+    .premium-card-copy strong {
+      font: 800 clamp(1.65rem, 2.4vw, 2.55rem) "Manrope"
+    }
+
+    .premium-card-copy em {
+      font-size: .7rem;
+      font-style: normal;
+      color: var(--gold-soft);
+      letter-spacing: .06em
+    }
+
+    @keyframes cardFloat {
+      50% {
+        transform: rotate(2deg) translateY(-16px)
+      }
+    }
+
+    @keyframes cardShine {
+
+      0%,
+      60% {
+        transform: translateX(-120%)
+      }
+
+      85%,
+      100% {
+        transform: translateX(120%)
+      }
+    }
+
+    .hero-now {
+      position: absolute;
+      z-index: 5;
+      right: 6.2%;
+      bottom: 10%;
+      width: min(29vw, 390px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: rgba(3, 8, 14, .56);
+      border: 1px solid rgba(255, 255, 255, .12);
+      backdrop-filter: blur(15px);
+      font-size: .72rem;
+      color: #c9d6df
+    }
+
+    .hero-now b {
+      color: #fff
+    }
+
+    .hero-now span:last-child {
+      margin-left: auto;
+      color: var(--gold-soft)
+    }
+
+    .hero-now-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #63e6a6;
+      box-shadow: 0 0 0 6px rgba(99, 230, 166, .10)
+    }
+
+    .proof-bar {
+      position: relative;
+      z-index: 6
+    }
+
+    .proof-grid {
+      background: linear-gradient(180deg, rgba(15, 32, 47, .88), rgba(8, 20, 31, .88));
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .24)
+    }
+
+    .content-section {
+      position: relative
+    }
+
+    .content-section:nth-of-type(even)::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      left: -300px;
+      top: 15%;
+      background: rgba(86, 182, 239, .06);
+      filter: blur(80px);
+      pointer-events: none
+    }
+
+    .spotlight,
+    .countdown,
+    .group-cta,
+    .ticket {
+      box-shadow: 0 32px 95px rgba(0, 0, 0, .28)
+    }
+
+    .show-card {
+      transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s, border-color .5s
+    }
+
+    .show-card:hover {
+      transform: translateY(-12px) scale(1.018);
+      box-shadow: 0 35px 85px rgba(0, 0, 0, .46);
+      border-color: rgba(86, 182, 239, .35)
+    }
+
+    .show-card:hover .show-art {
+      transform: scale(1.06)
+    }
+
+    .show-art {
+      transition: transform .7s cubic-bezier(.2, .8, .2, 1)
+    }
+
+    .ticket {
+      transition: transform .45s cubic-bezier(.2, .8, .2, 1), border-color .45s, box-shadow .45s
+    }
+
+    .ticket:hover {
+      transform: translateY(-10px);
+      border-color: rgba(86, 182, 239, .34);
+      box-shadow: 0 42px 100px rgba(0, 0, 0, .40)
+    }
+
+    .ticket.popular:hover {
+      transform: translateY(-22px)
+    }
+
+    .episode-row {
+      transition: transform .35s, background .35s, border-color .35s
+    }
+
+    .episode-row:hover {
+      transform: translateX(8px);
+      background: rgba(255, 255, 255, .055);
+      border-color: rgba(86, 182, 239, .25)
+    }
+
+    .reveal {
+      transition: opacity .85s ease, transform .85s cubic-bezier(.2, .8, .2, 1)
+    }
+
+    @media(max-width:1100px) {
+
+      .hero-premium-card,
+      .hero-now {
+        display: none
+      }
+    }
+
+    @media(max-width:760px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max))
+      }
+
+      .hero {
+        padding-top: 132px
+      }
+
+      .hero-logo {
+        width: 165px
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr
+      }
+
+      .hero-actions .btn {
+        width: 100%
+      }
+
+      .hero-copy {
+        line-height: 1.62
+      }
+
+      .mobile-menu {
+        background: radial-gradient(circle at 100% 0%, rgba(86, 182, 239, .25), transparent 38%), radial-gradient(circle at 0% 100%, rgba(224, 182, 65, .12), transparent 35%), rgba(3, 8, 14, .985)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition-duration: .01ms !important
+      }
+    }
   </style>
 </head>
 
@@ -1581,11 +1991,11 @@
     <nav class="nav container" aria-label="Navigation principale">
       <a class="brand" href="#accueil">
         <img src="logo-adja-bleu.png" alt="Logo ADJA BLEU">
-        <span class="brand-copy"><b>Festival ADJA BLEU</b><span>Billetterie officielle</span></span>
+        <span class="brand-copy"><b> ADJA BLEU</b><span>Édition 2026 · Mono</span></span>
       </a>
       <div class="nav-links">
-        <a href="#experience">Expérience</a><a href="#programme">Programme</a><a href="#tickets">Pass</a><a
-          href="#groupes">Groupes</a><a href="#contact">Contact</a>
+        <a href="#experience">Expérience</a><a href="#programme">Programme</a><a href="#groupes">Groupes</a><a
+          href="#contact">Contact</a>
       </div>
       <div class="nav-actions">
         <a class="btn btn-primary" href="#tickets">Réserver <span class="arrow">→</span></a>
@@ -1596,8 +2006,8 @@
   </header>
 
   <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="#experience">L’expérience</a><a href="#programme">Le programme</a><a href="#tickets">Les pass</a><a
-      href="#groupes">Groupes & entreprises</a><a href="#contact">Contact</a>
+    <a href="#experience">L’expérience</a><a href="#programme">Le programme</a><a href="#groupes">Groupes &
+      entreprises</a><a href="#contact">Contact</a>
     <a class="btn btn-primary" href="#tickets">Acheter mon ticket <span class="arrow">→</span></a>
   </aside>
 
@@ -1609,17 +2019,25 @@
       <div class="hero-orb" aria-hidden="true"></div>
       <div class="container hero-content">
         <img class="hero-logo" src="logo-adja-bleu.png" alt="ADJA BLEU">
-        <span class="live-badge"><i></i> Édition 2026 · Grand-Popo</span>
+        <span class="live-badge"><i></i> Édition 2026 · Mono</span>
         <h1><span class="hero-title-line">Trois jours.</span><span class="hero-title-accent">Une vibration.</span></h1>
         <p class="hero-copy">La culture, la musique, les saveurs et le patrimoine se rencontrent au bord de l’eau.
           Entrez dans l’univers ADJA BLEU et vivez l’événement dont tout le monde parlera.</p>
-        <div class="hero-meta"><span>25 — 27 août 2026</span><span>Grand-Popo, Bénin</span><span>Ticket QR
-            instantané</span></div>
+        <div class="hero-meta"><span>25 — 27 août 2026</span><span>Mono</span><span>Ticket QR instantané</span></div>
         <div class="hero-actions">
           <a class="btn btn-primary magnetic" href="#tickets">Prendre mon pass <span class="arrow">→</span></a>
           <a class="btn btn-ghost" href="#experience"><span aria-hidden="true">▶</span> Voir l’expérience</a>
         </div>
       </div>
+      <aside class="hero-premium-card" aria-label="Pass vedette">
+        <div class="premium-card-glow"></div>
+        <div class="premium-card-head"><span>PASS 03 JOURS</span><span>ADJA · 26</span></div>
+        <div class="premium-card-logo"><img src="logo-adja-bleu.png" alt=""></div>
+        <div class="premium-card-copy"><small>L’EXPÉRIENCE COMPLÈTE</small><strong>10 000 <em>FCFA</em></strong></div>
+        <div class="premium-card-foot"><span>25 — 27 AOÛT</span><span>GRAND-POPO</span></div>
+      </aside>
+      <div class="hero-now"><span class="hero-now-dot"></span><b>Les réservations sont ouvertes</b><span>Places
+          limitées</span></div>
       <div class="scroll-hint">Explorer</div>
     </section>
 
@@ -1644,7 +2062,7 @@
         <article class="spotlight reveal">
           <div class="spotlight-art">
             <div class="spotlight-copy"><span class="tag">Expérience vedette</span>
-              <h3>Grand-Popo devient la scène.</h3>
+              <h3>Mono devient la scène.</h3>
               <p>Concerts, rencontres, patrimoine, gastronomie et création contemporaine réunis dans un décor
                 exceptionnel.</p><a class="btn btn-primary" href="#programme">Découvrir le programme <span
                   class="arrow">→</span></a>
@@ -1706,7 +2124,7 @@
           <article class="show-card reveal">
             <div class="show-art"></div><span class="show-play">▶</span>
             <div class="show-content"><span class="tag">Évasion</span>
-              <h3>Grand-Popo</h3>
+              <h3>Mono</h3>
               <p>La mer, le fleuve et l’horizon en décor.</p>
             </div>
           </article>
